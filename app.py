@@ -22,54 +22,59 @@ if "streaming" not in st.session_state:
     st.session_state.streaming = False
     st.session_state.thread = None
 
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = False
+
 
 # ================= SIDEBAR =================
 st.sidebar.header("⚙️ Controls")
 
-# ---- THEME TOGGLE ----
-st.session_state.dark_mode = st.sidebar.toggle("🌙 Dark Mode")
 
 # ================= GLOBAL CSS =================
-st.markdown(f"""
+st.markdown("""
 <style>
-.block-container {{
+/* Layout spacing */
+.block-container {
     padding-top: 1.5rem;
     padding-bottom: 1rem;
-}}
+}
 
-section[data-testid="stSidebar"] {{
+/* Sidebar */
+section[data-testid="stSidebar"] {
     width: 320px !important;
-    background-color: {"#020617" if st.session_state.dark_mode else "#f8fafc"};
-}}
+    background-color: #020617;
+}
 
-body {{
-    background-color: {"#0e1117" if st.session_state.dark_mode else "white"};
-    color: {"#e5e7eb" if st.session_state.dark_mode else "black"};
-}}
+/* Page background */
+body {
+    background-color: #0e1117;
+    color: #e5e7eb;
+}
 
-div.stButton > button {{
-    background-color: {"#1d4ed8" if st.session_state.dark_mode else "#2563eb"};
+/* Buttons */
+div.stButton > button {
+    background-color: #1d4ed8;
     color: white;
     border-radius: 8px;
     font-weight: 600;
     white-space: nowrap;
-}}
+}
 
-div.stDownloadButton > button {{
-    background-color: {"#15803d" if st.session_state.dark_mode else "#16a34a"};
+/* Download buttons */
+div.stDownloadButton > button {
+    background-color: #15803d;
     color: white;
     border-radius: 8px;
     font-weight: 600;
     white-space: nowrap;
-}}
+}
 
-h1, h2, h3 {{
+/* Headers */
+h1, h2, h3 {
     margin-bottom: 0.4rem;
-}}
+    color: #e5e7eb;
+}
 </style>
 """, unsafe_allow_html=True)
+
 
 # ================= TITLE =================
 st.markdown("## 📊 Gemscap – Quant Analytics Dashboard")
