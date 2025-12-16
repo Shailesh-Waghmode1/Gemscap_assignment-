@@ -1,0 +1,136 @@
+<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .component-box { fill: #4A90E2; stroke: #2E5C8A; stroke-width: 2; }
+      .data-box { fill: #50C878; stroke: #2E8B57; stroke-width: 2; }
+      .ui-box { fill: #9B59B6; stroke: #6C3483; stroke-width: 2; }
+      .external-box { fill: #E74C3C; stroke: #C0392B; stroke-width: 2; }
+      .text-white { fill: white; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .text-small { fill: white; font-family: Arial, sans-serif; font-size: 11px; }
+      .arrow { stroke: #34495E; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { fill: #34495E; font-family: Arial, sans-serif; font-size: 12px; font-style: italic; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495E" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" style="font-size: 24px; font-weight: bold; fill: #2C3E50;">Gemscap Quant Dashboard Architecture</text>
+  
+  <!-- External Data Source -->
+  <rect x="50" y="80" width="180" height="80" rx="5" class="external-box"/>
+  <text x="140" y="110" text-anchor="middle" class="text-white">Binance Futures</text>
+  <text x="140" y="130" text-anchor="middle" class="text-white">WebSocket API</text>
+  <text x="140" y="145" text-anchor="middle" class="text-small">(Real-time Market Data)</text>
+  
+  <!-- Data Ingestion Layer -->
+  <rect x="320" y="80" width="180" height="80" rx="5" class="component-box"/>
+  <text x="410" y="110" text-anchor="middle" class="text-white">Data Ingestion</text>
+  <text x="410" y="130" text-anchor="middle" class="text-small">ingestion.py</text>
+  <text x="410" y="145" text-anchor="middle" class="text-small">asyncio + websockets</text>
+  
+  <!-- Arrow: Binance -> Ingestion -->
+  <path d="M 230 120 L 320 120" class="arrow"/>
+  <text x="270" y="110" class="label">live ticks</text>
+  
+  <!-- Storage Layer -->
+  <rect x="320" y="220" width="180" height="80" rx="5" class="data-box"/>
+  <text x="410" y="250" text-anchor="middle" class="text-white">Storage Layer</text>
+  <text x="410" y="270" text-anchor="middle" class="text-small">storage.py</text>
+  <text x="410" y="285" text-anchor="middle" class="text-small">SQLite Database</text>
+  
+  <!-- Arrow: Ingestion -> Storage -->
+  <path d="M 410 160 L 410 220" class="arrow"/>
+  <text x="420" y="195" class="label">persist ticks</text>
+  
+  <!-- Analytics Layer -->
+  <rect x="320" y="360" width="180" height="100" rx="5" class="component-box"/>
+  <text x="410" y="390" text-anchor="middle" class="text-white">Analytics Engine</text>
+  <text x="410" y="410" text-anchor="middle" class="text-small">analytics.py</text>
+  <text x="410" y="425" text-anchor="middle" class="text-small">pandas, numpy</text>
+  <text x="410" y="440" text-anchor="middle" class="text-small">statsmodels</text>
+  
+  <!-- Arrow: Storage -> Analytics -->
+  <path d="M 410 300 L 410 360" class="arrow"/>
+  <text x="420" y="335" class="label">query & resample</text>
+  
+  <!-- Analytics Components (side boxes) -->
+  <rect x="550" y="365" width="140" height="35" rx="3" style="fill: #5DADE2; stroke: #2E86AB; stroke-width: 1.5;"/>
+  <text x="620" y="387" text-anchor="middle" class="text-small">Resampling (1s/1m/5m)</text>
+  
+  <rect x="550" y="410" width="140" height="35" rx="3" style="fill: #5DADE2; stroke: #2E86AB; stroke-width: 1.5;"/>
+  <text x="620" y="432" text-anchor="middle" class="text-small">OLS Hedge Ratio</text>
+  
+  <rect x="550" y="455" width="140" height="35" rx="3" style="fill: #5DADE2; stroke: #2E86AB; stroke-width: 1.5;"/>
+  <text x="620" y="477" text-anchor="middle" class="text-small">Z-score & Correlation</text>
+  
+  <rect x="550" y="500" width="140" height="35" rx="3" style="fill: #5DADE2; stroke: #2E86AB; stroke-width: 1.5;"/>
+  <text x="620" y="522" text-anchor="middle" class="text-small">ADF Test</text>
+  
+  <!-- Arrows: Analytics -> Components -->
+  <path d="M 500 380 L 550 380" class="arrow"/>
+  <path d="M 500 425 L 550 425" class="arrow"/>
+  <path d="M 500 430 L 550 472" class="arrow"/>
+  <path d="M 500 440 L 550 517" class="arrow"/>
+  
+  <!-- UI Layer -->
+  <rect x="320" y="540" width="180" height="100" rx="5" class="ui-box"/>
+  <text x="410" y="570" text-anchor="middle" class="text-white">Frontend UI</text>
+  <text x="410" y="590" text-anchor="middle" class="text-small">app.py</text>
+  <text x="410" y="605" text-anchor="middle" class="text-small">Streamlit</text>
+  <text x="410" y="620" text-anchor="middle" class="text-small">Interactive Dashboard</text>
+  
+  <!-- Arrow: Analytics -> UI -->
+  <path d="M 410 460 L 410 540" class="arrow"/>
+  <text x="420" y="505" class="label">visualize & alerts</text>
+  
+  <!-- UI Features (side boxes) -->
+  <rect x="140" y="545" width="140" height="30" rx="3" style="fill: #AF7AC5; stroke: #7D3C98; stroke-width: 1.5;"/>
+  <text x="210" y="565" text-anchor="middle" class="text-small">Price Charts</text>
+  
+  <rect x="140" y="585" width="140" height="30" rx="3" style="fill: #AF7AC5; stroke: #7D3C98; stroke-width: 1.5;"/>
+  <text x="210" y="605" text-anchor="middle" class="text-small">Analytics Dashboard</text>
+  
+  <rect x="140" y="625" width="140" height="30" rx="3" style="fill: #AF7AC5; stroke: #7D3C98; stroke-width: 1.5;"/>
+  <text x="210" y="645" text-anchor="middle" class="text-small">Export & Alerts</text>
+  
+  <!-- Arrows: UI -> Features -->
+  <path d="M 320 560 L 280 560" class="arrow"/>
+  <path d="M 320 600 L 280 600" class="arrow"/>
+  <path d="M 320 620 L 280 640" class="arrow"/>
+  
+  <!-- Data Flow Legend -->
+  <rect x="750" y="100" width="220" height="180" rx="5" style="fill: #ECF0F1; stroke: #95A5A6; stroke-width: 2;"/>
+  <text x="860" y="125" text-anchor="middle" style="font-size: 16px; font-weight: bold; fill: #2C3E50;">Data Flow</text>
+  
+  <text x="760" y="155" style="font-size: 13px; fill: #2C3E50;">1. Live ticks from Binance</text>
+  <text x="760" y="180" style="font-size: 13px; fill: #2C3E50;">2. Persist to SQLite</text>
+  <text x="760" y="205" style="font-size: 13px; fill: #2C3E50;">3. Resample OHLC bars</text>
+  <text x="760" y="230" style="font-size: 13px; fill: #2C3E50;">4. Compute analytics</text>
+  <text x="760" y="255" style="font-size: 13px; fill: #2C3E50;">5. Visualize in Streamlit UI</text>
+  
+  <!-- Technology Stack Legend -->
+  <rect x="750" y="310" width="220" height="220" rx="5" style="fill: #ECF0F1; stroke: #95A5A6; stroke-width: 2;"/>
+  <text x="860" y="335" text-anchor="middle" style="font-size: 16px; font-weight: bold; fill: #2C3E50;">Technology Stack</text>
+  
+  <text x="760" y="365" style="font-size: 13px; fill: #2C3E50; font-weight: bold;">Backend:</text>
+  <text x="760" y="385" style="font-size: 12px; fill: #34495E;">• Python 3</text>
+  <text x="760" y="405" style="font-size: 12px; fill: #34495E;">• asyncio, websockets</text>
+  <text x="760" y="425" style="font-size: 12px; fill: #34495E;">• pandas, numpy</text>
+  <text x="760" y="445" style="font-size: 12px; fill: #34495E;">• statsmodels</text>
+  
+  <text x="760" y="475" style="font-size: 13px; fill: #2C3E50; font-weight: bold;">Storage:</text>
+  <text x="760" y="495" style="font-size: 12px; fill: #34495E;">• SQLite</text>
+  
+  <text x="760" y="520" style="font-size: 13px; fill: #2C3E50; font-weight: bold;">Frontend:</text>
+  <text x="760" y="540" style="font-size: 12px; fill: #34495E;">• Streamlit</text>
+  
+  <!-- Design Principles -->
+  <rect x="750" y="560" width="220" height="100" rx="5" style="fill: #ECF0F1; stroke: #95A5A6; stroke-width: 2;"/>
+  <text x="860" y="585" text-anchor="middle" style="font-size: 16px; font-weight: bold; fill: #2C3E50;">Design Principles</text>
+  <text x="760" y="610" style="font-size: 12px; fill: #34495E;">• Modular & loosely coupled</text>
+  <text x="760" y="630" style="font-size: 12px; fill: #34495E;">• Extensible architecture</text>
+  <text x="760" y="650" style="font-size: 12px; fill: #34495E;">• Production-ready prototype</text>
+</svg>
