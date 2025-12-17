@@ -163,7 +163,7 @@ gemscap-quant-dashboard/
 ### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/Shailesh-Waghmode1/Gemscap_assignment.git
-cd gemscap-quant-dashboard
+cd GEMSCAP_ASSIGNMENT
 ```
 
 ### 2️⃣ Install dependencies
