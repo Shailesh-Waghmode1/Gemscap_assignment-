@@ -156,9 +156,9 @@ gemscap-quant-dashboard/
 ├── README.md
 
 
----
-
+```
 ## Setup & Installation
+
 
 ### 1️⃣ Clone the repository
 ```bash
