@@ -162,7 +162,7 @@ gemscap-quant-dashboard/
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/Shailesh-Waghmode1/Gemscap_assignment-.git
+git clone https://github.com/Shailesh-Waghmode1/Gemscap_assignment.git
 cd gemscap-quant-dashboard
 ```
 
